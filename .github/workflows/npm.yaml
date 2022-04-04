@@ -1,4 +1,4 @@
-name: Development
+name: npm build
 
 on:
   pull_request:
@@ -10,8 +10,8 @@ on:
   workflow_call:
 
 jobs:
-  test:
-    name: Test application
+  build:
+    name: build application
     runs-on: ubuntu-latest
     steps:
       - name: "☁️ checkout repository"
@@ -27,9 +27,11 @@ jobs:
 
       - name: "📦 install dependencies"
         uses: bahmutov/npm-install@v1
+        working-directory: ./frontend
 
       - name: "🔍 run tests"
         run: npm run test --if-present
+        working-directory: ./frontend
 
   lint:
     name: Code standards
